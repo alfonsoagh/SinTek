@@ -1,6 +1,6 @@
  
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <title>@yield('title', config('app.name'))</title>
     @if(env('IS_DEMO')) 
@@ -55,8 +55,8 @@
     <!-- Volt CSS -->
     <link type="text/css" href="{{ asset('css/volt.css') }}" rel="stylesheet">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @livewireStyles
-    @livewireScripts
 
     <!-- Core -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -141,6 +141,7 @@
         {{ $slot }}
     @endif
 
+    @livewireScripts
     @yield('scripts')
 </body>
 

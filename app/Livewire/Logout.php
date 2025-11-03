@@ -9,6 +9,8 @@ class Logout extends Component
 
     public function logout() {
         auth()->logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
         return redirect()->route(config('proj.route_name_prefix', 'proj') . '.auth.login');
     }
     public function render()

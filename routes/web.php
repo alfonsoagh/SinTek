@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\ResetPasswordExample;
 use App\Livewire\UpgradeToPro;
 use App\Livewire\Users;
+use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Auth\FallbackAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,12 +46,21 @@ $namePrefix = config('proj.route_name_prefix', 'proj');
 // Redirección base a login dentro del prefijo
 Route::redirect('/', "/p/{$slug}/login");
 
+// Verificación de correo (enlace firmado, sin exigir sesión)
+Route::get('/email/verify/{id}/{hash}', VerifyEmailController::class)
+    ->middleware(['signed'])
+    ->name('verification.verify');
+
 Route::prefix("p/{$slug}")
     ->as($namePrefix . '.')
     ->group(function () use ($namePrefix) {
         // Público
-        Route::get('/register', Register::class)->name('auth.register');
-        Route::get('/login', Login::class)->name('auth.login');
+    Route::get('/register', Register::class)->name('auth.register');
+    Route::post('/register', [FallbackAuthController::class, 'register'])->name('auth.register.submit');
+
+    Route::get('/login', Login::class)->name('auth.login');
+    Route::post('/login', [FallbackAuthController::class, 'login'])->name('auth.login.submit');
+    Route::post('/logout', [FallbackAuthController::class, 'logout'])->name('auth.logout');
         Route::get('/forgot-password', ForgotPassword::class)->name('auth.forgot-password');
         Route::get('/reset-password/{id}', ResetPassword::class)->name('auth.reset-password')->middleware('signed');
 

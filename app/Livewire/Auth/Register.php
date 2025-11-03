@@ -1,9 +1,20 @@
 <?php
+/**
+ * Empresa: CETAM
+ * Proyecto: ST
+ * Archivo: Register.php
+ * Fecha de creación: 02/11/25
+ * Realizado por: Alfonso Angel García Hernández
+ * Validado por: Alfonso Angel García Hernández
+ */
 
 namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\Worker;
+use App\Models\Position;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Rule;
@@ -11,10 +22,30 @@ use Livewire\Attributes\Rule;
 class Register extends Component
 {
 
-    #[Rule('required|email:rfc,dns|unique:users')]
+    // User data
+    #[Rule('required|string|max:100')]
+    public $first_name = '';
+
+    #[Rule('required|string|max:100')]
+    public $last_name = '';
+
+    #[Rule('required|email|unique:users,email')]
     public $email = '';
 
-    #[Rule('required|min:6')]
+    // Sexo: M/F
+    #[Rule('required|in:M,F')]
+    public $gender = '';
+
+    // CURP (18 chars)
+    #[Rule('required|regex:/^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[0-9]{2}$/i')]
+    public $curp = '';
+
+    // Claves presupuestales (texto)
+    #[Rule('required|string|max:2000')]
+    public $budget_keys = '';
+
+    // Auth
+    #[Rule('required|min:8')]
     public $password = '';
 
     #[Rule('required|same:password')]
@@ -27,24 +58,74 @@ class Register extends Component
         }
     }
 
-    public function updatedEmail()
-    {
-        $this->validate(['email'=>'required|email:rfc,dns|unique:users']);
-    }
+    public function updatedEmail() { $this->validate(['email'=>'required|email|unique:users,email']); }
     
     public function register()
     {
-        $this->validate();
+        $validated = $this->validate();
 
-        $user = User::create([
-            'email' =>$this->email,
-            'password' => Hash::make($this->password),
-            'remember_token' => Str::random(10),
-        ]);
+        DB::transaction(function () use (&$user) {
+            $user = User::create([
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'gender' => $this->gender,
+                'email' => $this->email,
+                'curp' => strtoupper($this->curp),
+                'budget_keys' => $this->budget_keys,
+                'password' => Hash::make($this->password),
+                'remember_token' => Str::random(10),
+                // email_verified_at => null (default)
+                // approved_at => null (pending secretary approval)
+            ]);
 
-        auth()->login($user);
+            // In local environment, mark as verified and approved for faster dev loop
+            if (app()->environment('local')) {
+                $user->forceFill([
+                    'email_verified_at' => now(),
+                    'approved_at' => now(),
+                ])->save();
+            }
 
-        return redirect()->intended(route(config('proj.route_name_prefix', 'proj') . '.profile.index'));
+            // Create Worker profile
+            $worker = Worker::create([
+                'user_id' => $user->id,
+                'curp' => strtoupper($this->curp),
+                'sexo' => strtoupper($this->gender),
+            ]);
+
+            // Parse budget_keys into Position rows
+            $keys = preg_split('/[\n,;]+/', (string) $this->budget_keys);
+            foreach ($keys as $key) {
+                $clave = trim($key);
+                if ($clave === '') continue;
+                Position::create([
+                    'worker_id' => $worker->id,
+                    'clave_presupuestal' => $clave,
+                    'plaza' => null,
+                    'puesto' => null,
+                ]);
+            }
+        });
+
+        // In local env, auto-login and go straight to dashboard
+        if (app()->environment('local') && isset($user)) {
+            auth()->login($user, true);
+            $route = config('proj.route_name_prefix', 'proj') . '.dashboard.index';
+            return redirect()->route($route);
+        }
+
+        // In non-local env: send email verification and take user to login page
+        if (isset($user) && method_exists($user, 'sendEmailVerificationNotification')) {
+            try {
+                $user->sendEmailVerificationNotification();
+            } catch (\Throwable $e) {
+                // Log but do not break registration if mail is misconfigured
+                logger()->warning('Email verification not sent: '.$e->getMessage());
+            }
+        }
+
+        session()->flash('status', __('Hemos enviado un enlace de verificación a tu correo. Tu cuenta quedará activa cuando un secretario la apruebe.'));
+        return redirect()->route(config('proj.route_name_prefix', 'proj') . '.auth.login');
     }
 
     public function render()
