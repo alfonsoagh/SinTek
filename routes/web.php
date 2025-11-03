@@ -25,6 +25,18 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\ResetPasswordExample;
 use App\Livewire\UpgradeToPro;
 use App\Livewire\Users;
+use App\Livewire\PreguntasFrecuentes;
+use App\Livewire\Worker\TramitesDisponibles;
+use App\Livewire\Worker\MisTramites;
+use App\Livewire\Worker\Convocatorias;
+use App\Livewire\Worker\Notificaciones;
+use App\Livewire\Admin\GestionTramites;
+use App\Livewire\Admin\Solicitudes;
+use App\Livewire\Admin\ConvocatoriasEventos;
+use App\Livewire\Admin\PlantillasDocumentos;
+use App\Livewire\Admin\Reportes;
+use App\Livewire\Admin\Bitacora;
+use App\Livewire\Admin\Configuracion;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\FallbackAuthController;
 
@@ -73,6 +85,26 @@ Route::prefix("p/{$slug}")
         Route::middleware('auth')->group(function () {
             Route::get('/dashboard', Dashboard::class)->name('dashboard.index');
             Route::get('/profile', Profile::class)->name('profile.index');
+
+            // Preguntas frecuentes (compartido entre todos los roles)
+            Route::get('/preguntas-frecuentes', PreguntasFrecuentes::class)->name('preguntas-frecuentes');
+
+            // Rutas para trabajadores (workers)
+            Route::get('/tramites-disponibles', TramitesDisponibles::class)->name('worker.tramites-disponibles');
+            Route::get('/mis-tramites', MisTramites::class)->name('worker.mis-tramites');
+            Route::get('/convocatorias', Convocatorias::class)->name('worker.convocatorias');
+            Route::get('/notificaciones', Notificaciones::class)->name('worker.notificaciones');
+
+            // Rutas para administradores/secretarios
+            Route::get('/gestion-tramites', GestionTramites::class)->name('admin.gestion-tramites');
+            Route::get('/solicitudes', Solicitudes::class)->name('admin.solicitudes');
+            Route::get('/convocatorias-eventos', ConvocatoriasEventos::class)->name('admin.convocatorias-eventos');
+            Route::get('/plantillas-documentos', PlantillasDocumentos::class)->name('admin.plantillas-documentos');
+            Route::get('/reportes', Reportes::class)->name('admin.reportes');
+            Route::get('/bitacora', Bitacora::class)->name('admin.bitacora');
+            Route::get('/configuracion', Configuracion::class)->name('admin.configuracion');
+
+            // Rutas de la plantilla original
             Route::get('/profile-example', ProfileExample::class)->name('profile.example');
             Route::get('/users', Users::class)->name('users.index');
             Route::get('/login-example', LoginExample::class)->name('examples.login');

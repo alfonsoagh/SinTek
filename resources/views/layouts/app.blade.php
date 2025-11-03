@@ -17,6 +17,15 @@
         $prefix . '.dashboard.index', $prefix . '.profile.index', $prefix . '.profile.example', $prefix . '.users.index',
         $prefix . '.ui.bootstrap-tables', $prefix . '.billing.transactions', $prefix . '.ui.buttons', $prefix . '.ui.forms',
         $prefix . '.ui.modals', $prefix . '.ui.notifications', $prefix . '.ui.typography', $prefix . '.marketing.upgrade-to-pro',
+        // Rutas de trabajadores
+        $prefix . '.worker.tramites-disponibles', $prefix . '.worker.mis-tramites',
+        $prefix . '.worker.convocatorias', $prefix . '.worker.notificaciones',
+        // Rutas de administradores
+        $prefix . '.admin.gestion-tramites', $prefix . '.admin.solicitudes',
+        $prefix . '.admin.convocatorias-eventos', $prefix . '.admin.plantillas-documentos',
+        $prefix . '.admin.reportes', $prefix . '.admin.bitacora', $prefix . '.admin.configuracion',
+        // Rutas compartidas
+        $prefix . '.preguntas-frecuentes',
     ]))
     @php($isAuthShell = in_array($routeName, [
         // Rutas de autenticación/landing
