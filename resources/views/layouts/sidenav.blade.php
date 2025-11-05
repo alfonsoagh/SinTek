@@ -1,19 +1,22 @@
 {{--
-  Empresa: CETAM
-  Proyecto: ST
-  Archivo: sidenav.blade.php
-  Fecha de creación: 02/11/25
-  Modificado: 03/11/25
-  Realizado por: Alfonso Angel García Hernández
-  Validado por: Alfonso Angel García Hernández
+  Company: CETAM
+  Project: ST
+  File: sidenav.blade.php
+  Created on: 04/11/2025
+  Created by: Alfonso Angel García Hernández
+  Approved by: Alfonso Angel García Hernández
+
+  Changelog:
 --}}
 
 @php
-    $userRole = auth()->user()->role ?? 'basic';
+    $userRole = auth()->user()->role ?? 'worker';
 @endphp
 
-@if($userRole === 'admin' || $userRole === 'secretary')
+@if($userRole === 'admin')
     @include('layouts.sidenav-admin')
+@elseif($userRole === 'secretary')
+    @include('layouts.sidenav-secretary')
 @elseif($userRole === 'worker')
     @include('layouts.sidenav-worker')
 @else

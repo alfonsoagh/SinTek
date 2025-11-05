@@ -20,7 +20,12 @@
         // Rutas de trabajadores
         $prefix . '.worker.tramites-disponibles', $prefix . '.worker.mis-tramites',
         $prefix . '.worker.convocatorias', $prefix . '.worker.notificaciones',
+        // Rutas de secretarios
+        $prefix . '.secretary.panel-solicitudes', $prefix . '.secretary.validar-pasos',
+        $prefix . '.secretary.busqueda-trabajadores', $prefix . '.secretary.convocatorias-documentos',
+        $prefix . '.secretary.reportes', $prefix . '.secretary.notificaciones',
         // Rutas de administradores
+        $prefix . '.admin.crear-proceso', $prefix . '.admin.definir-pasos', $prefix . '.admin.modificar-proceso',
         $prefix . '.admin.gestion-tramites', $prefix . '.admin.solicitudes',
         $prefix . '.admin.convocatorias-eventos', $prefix . '.admin.plantillas-documentos',
         $prefix . '.admin.reportes', $prefix . '.admin.bitacora', $prefix . '.admin.configuracion',

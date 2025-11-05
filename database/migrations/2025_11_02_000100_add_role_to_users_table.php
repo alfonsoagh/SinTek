@@ -17,7 +17,8 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             if (!Schema::hasColumn('users', 'role')) {
-                $table->string('role', 20)->default('worker')->after('password');
+                // Roles: 'worker' (Trabajador), 'secretary' (Secretario/Operador), 'admin' (Administrador)
+                $table->enum('role', ['worker', 'secretary', 'admin'])->default('worker')->after('password');
             }
         });
     }

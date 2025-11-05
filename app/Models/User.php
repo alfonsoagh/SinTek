@@ -58,4 +58,32 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Worker::class);
     }
+
+    /**
+     * Helper methods para verificar roles
+     */
+    public function isWorker(): bool
+    {
+        return $this->role === 'worker';
+    }
+
+    public function isSecretary(): bool
+    {
+        return $this->role === 'secretary';
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    public function hasAnyRole(array $roles): bool
+    {
+        return in_array($this->role, $roles);
+    }
 }

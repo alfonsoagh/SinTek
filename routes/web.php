@@ -37,6 +37,15 @@ use App\Livewire\Admin\PlantillasDocumentos;
 use App\Livewire\Admin\Reportes;
 use App\Livewire\Admin\Bitacora;
 use App\Livewire\Admin\Configuracion;
+use App\Livewire\Admin\CrearProceso;
+use App\Livewire\Admin\DefinirPasos;
+use App\Livewire\Admin\ModificarProceso;
+use App\Livewire\Secretary\PanelSolicitudes;
+use App\Livewire\Secretary\ValidarPasos;
+use App\Livewire\Secretary\BusquedaTrabajadores;
+use App\Livewire\Secretary\ConvocatoriasDocumentos;
+use App\Livewire\Secretary\Reportes as SecretaryReportes;
+use App\Livewire\Secretary\Notificaciones as SecretaryNotificaciones;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\FallbackAuthController;
 
@@ -90,23 +99,44 @@ Route::prefix("p/{$slug}")
             Route::get('/preguntas-frecuentes', PreguntasFrecuentes::class)->name('preguntas-frecuentes');
 
             // Rutas para trabajadores (workers)
-            Route::get('/tramites-disponibles', TramitesDisponibles::class)->name('worker.tramites-disponibles');
-            Route::get('/mis-tramites', MisTramites::class)->name('worker.mis-tramites');
-            Route::get('/convocatorias', Convocatorias::class)->name('worker.convocatorias');
-            Route::get('/notificaciones', Notificaciones::class)->name('worker.notificaciones');
+            Route::middleware(['role:worker'])->group(function () {
+                Route::get('/tramites-disponibles', TramitesDisponibles::class)->name('worker.tramites-disponibles');
+                Route::get('/mis-tramites', MisTramites::class)->name('worker.mis-tramites');
+                Route::get('/convocatorias', Convocatorias::class)->name('worker.convocatorias');
+                Route::get('/notificaciones', Notificaciones::class)->name('worker.notificaciones');
+            });
 
-            // Rutas para administradores/secretarios
-            Route::get('/gestion-tramites', GestionTramites::class)->name('admin.gestion-tramites');
-            Route::get('/solicitudes', Solicitudes::class)->name('admin.solicitudes');
-            Route::get('/convocatorias-eventos', ConvocatoriasEventos::class)->name('admin.convocatorias-eventos');
-            Route::get('/plantillas-documentos', PlantillasDocumentos::class)->name('admin.plantillas-documentos');
-            Route::get('/reportes', Reportes::class)->name('admin.reportes');
-            Route::get('/bitacora', Bitacora::class)->name('admin.bitacora');
-            Route::get('/configuracion', Configuracion::class)->name('admin.configuracion');
+            // Rutas para secretarios/operadores
+            Route::middleware(['role:secretary'])->group(function () {
+                Route::get('/panel-solicitudes', PanelSolicitudes::class)->name('secretary.panel-solicitudes');
+                Route::get('/validar-pasos', ValidarPasos::class)->name('secretary.validar-pasos');
+                Route::get('/busqueda-trabajadores', BusquedaTrabajadores::class)->name('secretary.busqueda-trabajadores');
+                Route::get('/convocatorias-documentos', ConvocatoriasDocumentos::class)->name('secretary.convocatorias-documentos');
+                Route::get('/reportes-secretary', SecretaryReportes::class)->name('secretary.reportes');
+                Route::get('/notificaciones-secretary', SecretaryNotificaciones::class)->name('secretary.notificaciones');
+            });
+
+            // Rutas para administradores
+            Route::middleware(['role:admin'])->group(function () {
+                Route::get('/crear-proceso', CrearProceso::class)->name('admin.crear-proceso');
+                Route::get('/definir-pasos', DefinirPasos::class)->name('admin.definir-pasos');
+                Route::get('/modificar-proceso', ModificarProceso::class)->name('admin.modificar-proceso');
+                Route::get('/gestion-tramites', GestionTramites::class)->name('admin.gestion-tramites');
+                Route::get('/solicitudes', Solicitudes::class)->name('admin.solicitudes');
+                Route::get('/convocatorias-eventos', ConvocatoriasEventos::class)->name('admin.convocatorias-eventos');
+                Route::get('/plantillas-documentos', PlantillasDocumentos::class)->name('admin.plantillas-documentos');
+                Route::get('/reportes', Reportes::class)->name('admin.reportes');
+                Route::get('/bitacora', Bitacora::class)->name('admin.bitacora');
+                Route::get('/configuracion', Configuracion::class)->name('admin.configuracion');
+            });
 
             // Rutas de la plantilla original
             Route::get('/profile-example', ProfileExample::class)->name('profile.example');
-            Route::get('/users', Users::class)->name('users.index');
+
+            // Ruta de gestión de usuarios (solo para admin)
+            Route::middleware(['role:admin'])->group(function () {
+                Route::get('/users', Users::class)->name('users.index');
+            });
             Route::get('/login-example', LoginExample::class)->name('examples.login');
             Route::get('/register-example', RegisterExample::class)->name('examples.register');
             Route::get('/forgot-password-example', ForgotPasswordExample::class)->name('examples.forgot-password');
