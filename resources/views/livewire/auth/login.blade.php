@@ -82,12 +82,6 @@
                                 <button type="submit" class="btn btn-gray-800">Iniciar sesión</button>
                             </div>
                         </form>
-                        <div class="d-flex justify-content-center align-items-center mt-4">
-                            <span class="fw-normal">
-                                ¿No tienes cuenta?
-                                <a href="{{ route(config('proj.route_name_prefix', 'proj').'.auth.register') }}" class="fw-bold">Crear cuenta</a>
-                            </span>
-                        </div>
                         {{-- Solo acceso institucional: se remueven opciones sociales y registro --}}
                     </div>
                 </div>

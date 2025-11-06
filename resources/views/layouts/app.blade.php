@@ -1,11 +1,15 @@
- 
-{{-- 
-    Empresa: CETAM
-    Proyecto: ST
-    Archivo: app.blade.php
-    Fecha de creación: 02/11/25
-    Realizado por: Alfonso Angel García Hernández
-    Validado por: Alfonso Angel García Hernández
+{{--
+    Company: CETAM
+    Project: ST
+    File: app.blade.php
+    Created on: 02/11/2025
+    Created by: Alfonso Angel Garcia Hernandez
+    Approved by: Alfonso Angel Garcia Hernandez
+
+    Changelog:
+    - ID: <ID> | Date: dd/mm/yyyy
+      Modified by: <Developer name>
+      Description: <Brief description of change>
 --}}
 @extends('layouts.base')
 

@@ -1,12 +1,15 @@
 {{--
-  Company: CETAM
-  Project: ST
-  File: sidenav-admin.blade.php
-  Created on: 04/11/2025
-  Created by: Alfonso Angel García Hernández
-  Approved by: Alfonso Angel García Hernández
+    Company: CETAM
+    Project: ST
+    File: sidenav-admin.blade.php
+    Created on: 04/11/2025
+    Created by: Alfonso Angel Garcia Hernandez
+    Approved by: Alfonso Angel Garcia Hernandez
 
-  Changelog:
+    Changelog:
+    - ID: <ID> | Date: dd/mm/yyyy
+      Modified by: <Developer name>
+      Description: <Brief description of change>
 --}}
 <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
   <div class="sidebar-inner px-2 pt-3">
