@@ -1,19 +1,15 @@
 {{--
- * Company: CETAM
- * Project: ST
- * File: reportes.blade.php
- * Created on: 04/11/2025
- * Created by: Alfonso Angel García Hernández
- * Approved by: Alfonso Angel García Hernández
- *
- * Changelog:
- * - ID: <ID> | Modified on: dd/mm/yyyy |
- * Modified by: <Developer name> |
- * Description: <Brief description of change> |
- *
- * - ID: <ID> | Modified on: dd/mm/yyyy |
- * Modified by: <Developer name> |
- * Description: <Brief description of change> |
+    Company: CETAM
+    Project: ST
+    File: reportes.blade.php
+    Created on: 04/11/2025
+    Created by: Alfonso Angel Garcia Hernandez
+    Approved by: Alfonso Angel Garcia Hernandez
+
+    Changelog:
+    - ID: <ID> | Date: dd/mm/yyyy
+      Modified by: <Developer name>
+      Description: <Brief description of change>
 --}}
 
 {{-- Nota Livewire: esta vista debe tener UN único elemento raíz --}}

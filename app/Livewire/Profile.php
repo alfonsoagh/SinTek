@@ -45,6 +45,18 @@ class Profile extends Component
 
     public function render()
     {
+        $user = auth()->user();
+
+        // Determinar qué vista mostrar según el rol
+        if ($user->hasRole('admin')) {
+            return view('livewire.admin.perfil')->layout('layouts.app');
+        } elseif ($user->hasRole('secretary')) {
+            return view('livewire.secretary.perfil')->layout('layouts.app');
+        } elseif ($user->hasRole('worker')) {
+            return view('livewire.worker.mis-datos')->layout('layouts.app');
+        }
+
+        // Vista por defecto
         return view('livewire.profile')->layout('layouts.app');
     }
 }

@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\ResetPasswordExample;
 use App\Livewire\UpgradeToPro;
 use App\Livewire\Users;
+use App\Livewire\UserCreate;
 use App\Livewire\PreguntasFrecuentes;
 use App\Livewire\Worker\TramitesDisponibles;
 use App\Livewire\Worker\MisTramites;
@@ -38,6 +39,7 @@ use App\Livewire\Admin\Reportes;
 use App\Livewire\Admin\Bitacora;
 use App\Livewire\Admin\Configuracion;
 use App\Livewire\Admin\CrearProceso;
+use App\Livewire\Admin\CrearPaso;
 use App\Livewire\Admin\DefinirPasos;
 use App\Livewire\Admin\ModificarProceso;
 use App\Livewire\Secretary\PanelSolicitudes;
@@ -120,6 +122,7 @@ Route::prefix("p/{$slug}")
             Route::middleware(['role:admin'])->group(function () {
                 Route::get('/crear-proceso', CrearProceso::class)->name('admin.crear-proceso');
                 Route::get('/definir-pasos', DefinirPasos::class)->name('admin.definir-pasos');
+                Route::get('/crear-paso', CrearPaso::class)->name('admin.crear-paso');
                 Route::get('/modificar-proceso', ModificarProceso::class)->name('admin.modificar-proceso');
                 Route::get('/gestion-tramites', GestionTramites::class)->name('admin.gestion-tramites');
                 Route::get('/solicitudes', Solicitudes::class)->name('admin.solicitudes');
@@ -136,6 +139,7 @@ Route::prefix("p/{$slug}")
             // Ruta de gestión de usuarios (solo para admin)
             Route::middleware(['role:admin'])->group(function () {
                 Route::get('/users', Users::class)->name('users.index');
+                Route::get('/users/create', UserCreate::class)->name('users.create');
             });
             Route::get('/login-example', LoginExample::class)->name('examples.login');
             Route::get('/register-example', RegisterExample::class)->name('examples.register');

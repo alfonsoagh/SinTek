@@ -1,19 +1,15 @@
 {{--
- * Company: CETAM
- * Project: ST
- * File: modificar-proceso.blade.php
- * Created on: 04/11/2025
- * Created by: Alfonso Angel García Hernández
- * Approved by: Alfonso Angel García Hernández
- *
- * Changelog:
- * - ID: <ID> | Modified on: dd/mm/yyyy |
- * Modified by: <Developer name> |
- * Description: <Brief description of change> |
- *
- * - ID: <ID> | Modified on: dd/mm/yyyy |
- * Modified by: <Developer name> |
- * Description: <Brief description of change> |
+    Company: CETAM
+    Project: ST
+    File: modificar-proceso.blade.php
+    Created on: 04/11/2025
+    Created by: Alfonso Angel Garcia Hernandez
+    Approved by: Alfonso Angel Garcia Hernandez
+
+    Changelog:
+    - ID: <ID> | Date: dd/mm/yyyy
+      Modified by: <Developer name>
+      Description: <Brief description of change>
 --}}
 
 {{-- Nota Livewire: esta vista debe tener UN único elemento raíz --}}
@@ -140,32 +136,12 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="process_requires_approval" checked>
-                                <label class="form-check-label" for="process_requires_approval">
-                                    Requiere aprobación
-                                </label>
-                            </div>
-                            <small class="form-text text-muted">El proceso necesita aprobación en cada paso.</small>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" id="process_notifications" checked>
                                 <label class="form-check-label" for="process_notifications">
                                     Enviar notificaciones
                                 </label>
                             </div>
                             <small class="form-text text-muted">Notificar automáticamente a los usuarios involucrados.</small>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" id="process_documents_required" checked>
-                                <label class="form-check-label" for="process_documents_required">
-                                    Requiere documentos
-                                </label>
-                            </div>
-                            <small class="form-text text-muted">El proceso requiere carga de documentos.</small>
                         </div>
                     </div>
 

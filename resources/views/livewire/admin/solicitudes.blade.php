@@ -1,10 +1,15 @@
 {{--
-  Empresa: CETAM
-  Proyecto: ST
-  Archivo: solicitudes.blade.php
-  Fecha de creación: 03/11/25
-  Realizado por: Alfonso Angel García Hernández
-  Validado por: Alfonso Angel García Hernández
+    Company: CETAM
+    Project: ST
+    File: solicitudes.blade.php
+    Created on: 03/11/2025
+    Created by: Alfonso Angel Garcia Hernandez
+    Approved by: Alfonso Angel Garcia Hernandez
+
+    Changelog:
+    - ID: <ID> | Date: dd/mm/yyyy
+      Modified by: <Developer name>
+      Description: <Brief description of change>
 --}}
 
 {{-- Nota Livewire: esta vista debe tener UN único elemento raíz --}}

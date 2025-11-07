@@ -18,7 +18,7 @@
     @php($prefix = config('proj.route_name_prefix', 'proj'))
     @php($isAppShell = in_array($routeName, [
         // Rutas app principales con navegación completa
-        $prefix . '.dashboard.index', $prefix . '.profile.index', $prefix . '.profile.example', $prefix . '.users.index',
+        $prefix . '.dashboard.index', $prefix . '.profile.index', $prefix . '.profile.example', $prefix . '.users.index', $prefix . '.users.create',
         $prefix . '.ui.bootstrap-tables', $prefix . '.billing.transactions', $prefix . '.ui.buttons', $prefix . '.ui.forms',
         $prefix . '.ui.modals', $prefix . '.ui.notifications', $prefix . '.ui.typography', $prefix . '.marketing.upgrade-to-pro',
         // Rutas de trabajadores
@@ -29,8 +29,8 @@
         $prefix . '.secretary.busqueda-trabajadores', $prefix . '.secretary.convocatorias-documentos',
         $prefix . '.secretary.reportes', $prefix . '.secretary.notificaciones',
         // Rutas de administradores
-        $prefix . '.admin.crear-proceso', $prefix . '.admin.definir-pasos', $prefix . '.admin.modificar-proceso',
-        $prefix . '.admin.gestion-tramites', $prefix . '.admin.solicitudes',
+        $prefix . '.admin.crear-proceso', $prefix . '.admin.definir-pasos', $prefix . '.admin.crear-paso',
+        $prefix . '.admin.modificar-proceso', $prefix . '.admin.gestion-tramites', $prefix . '.admin.solicitudes',
         $prefix . '.admin.convocatorias-eventos', $prefix . '.admin.plantillas-documentos',
         $prefix . '.admin.reportes', $prefix . '.admin.bitacora', $prefix . '.admin.configuracion',
         // Rutas compartidas

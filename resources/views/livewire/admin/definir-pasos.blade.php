@@ -1,19 +1,15 @@
 {{--
- * Company: CETAM
- * Project: ST
- * File: definir-pasos.blade.php
- * Created on: 04/11/2025
- * Created by: Alfonso Angel García Hernández
- * Approved by: Alfonso Angel García Hernández
- *
- * Changelog:
- * - ID: <ID> | Modified on: dd/mm/yyyy |
- * Modified by: <Developer name> |
- * Description: <Brief description of change> |
- *
- * - ID: <ID> | Modified on: dd/mm/yyyy |
- * Modified by: <Developer name> |
- * Description: <Brief description of change> |
+    Company: CETAM
+    Project: ST
+    File: definir-pasos.blade.php
+    Created on: 04/11/2025
+    Created by: Alfonso Angel Garcia Hernandez
+    Approved by: Alfonso Angel Garcia Hernandez
+
+    Changelog:
+    - ID: <ID> | Date: dd/mm/yyyy
+      Modified by: <Developer name>
+      Description: <Brief description of change>
 --}}
 
 {{-- Nota Livewire: esta vista debe tener UN único elemento raíz --}}
@@ -39,7 +35,7 @@
             <p class="mb-0">Configura el flujo de trabajo y los pasos que componen el proceso.</p>
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
-            <a href="#" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
+            <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.admin.crear-paso') }}" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
                 <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>

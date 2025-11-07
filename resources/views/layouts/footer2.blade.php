@@ -14,25 +14,20 @@
 <footer class="p-5 mb-4">
     <div class="container">
         <div class="col-12 d-flex align-items-center justify-content-center">
-            <div class="col-12 col-md-4 mb-4 mb-md-0 text-lg-center">
-                <!-- List -->
+            <div class="col-12 col-md-8 mb-4 mb-md-0 text-lg-center">
                 <ul class="list-inline list-group-flush list-group-borderless">
                     <li class="list-inline-item px-0 px-sm-2">
-                        <a href="https://themesberg.com/about">About</a>
+                        <a href="#">Términos de uso</a>
                     </li>
                     <li class="list-inline-item px-0 px-sm-2">
-                        <a href="https://themesberg.com/themes">Themes</a>
+                        <a href="#">Aviso de privacidad</a>
                     </li>
                     <li class="list-inline-item px-0 px-sm-2">
-                        <a href="https://themesberg.com/blog">Blog</a>
-                    </li>
-                    <li class="list-inline-item px-0 px-sm-2">
-                        <a href="https://themesberg.com/contact">Contact</a>
+                        <a href="#">Soporte técnico</a>
                     </li>
                 </ul>
-                <p class="mb-0 text-center">© 2019-<span class="current-year"></span> <a
-                        class="text-primary fw-normal" href="https://themesberg.com" target="_blank">Themesberg &
-                    </a><a href="https://updivision.com/" target="_blank">Updivision</a></p>
+                <p class="mb-0 text-center">© <span class="current-year"></span> <a
+                        class="text-primary fw-normal" href="#">{{ config('app.name', 'SinTek') }}</a> - Sistema de Gestión de Trámites</p>
             </div>
         </div>
     </div>

@@ -1,0 +1,362 @@
+{{--
+    Company: CETAM
+    Project: ST
+    File: crear-paso.blade.php
+    Created on: 05/11/2025
+    Created by: Alfonso Angel Garcia Hernandez
+    Approved by: Alfonso Angel Garcia Hernandez
+
+    Changelog:
+    - ID: <ID> | Date: dd/mm/yyyy
+      Modified by: <Developer name>
+      Description: <Brief description of change>
+--}}
+
+{{-- Nota Livewire: esta vista debe tener UN único elemento raíz --}}
+{{-- El layout se aplica desde el componente con ->layout('layouts.app') --}}
+
+<div>
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+                <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.dashboard.index') }}">
+                            <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.admin.definir-pasos') }}">Definir pasos</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear paso</li>
+                </ol>
+            </nav>
+            <h2 class="h4">Crear paso de proceso</h2>
+            <p class="mb-0">Define un nuevo paso para el flujo de trabajo del proceso.</p>
+        </div>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.admin.definir-pasos') }}" class="btn btn-sm btn-outline-gray-600 d-inline-flex align-items-center">
+                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Volver
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-xl-8">
+            <div class="card card-body shadow border-0 mb-4">
+                <h2 class="h5 mb-4">Información del paso</h2>
+                <form>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="proceso">Proceso</label>
+                            <select class="form-select" id="proceso">
+                                <option selected>Seleccionar proceso...</option>
+                                <option value="1">SOL-VAC-001 - Solicitud de vacaciones</option>
+                                <option value="2">REM-GAS-001 - Reembolso de gastos</option>
+                                <option value="3">CAM-PUE-001 - Cambio de puesto</option>
+                            </select>
+                            <small class="form-text text-muted">Selecciona el proceso al que pertenecerá este paso.</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 mb-3">
+                            <label for="nombre_paso">Nombre del paso</label>
+                            <input class="form-control" id="nombre_paso" type="text" placeholder="Ej: Revisión de supervisor">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="orden">Orden</label>
+                            <input class="form-control" id="orden" type="number" placeholder="1" min="1">
+                            <small class="form-text text-muted">Posición en el flujo.</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="descripcion">Descripción</label>
+                            <textarea class="form-control" id="descripcion" rows="3" placeholder="Describe brevemente el objetivo de este paso..."></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="tipo_paso">Tipo de paso</label>
+                            <select class="form-select" id="tipo_paso">
+                                <option selected>Seleccionar tipo...</option>
+                                <option value="formulario">Formulario</option>
+                                <option value="aprobacion">Aprobación</option>
+                                <option value="validacion">Validación</option>
+                                <option value="carga_archivos">Carga de archivos</option>
+                                <option value="comunicacion">Comunicación</option>
+                                <option value="final">Final</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="responsable">Responsable</label>
+                            <select class="form-select" id="responsable">
+                                <option selected>Seleccionar responsable...</option>
+                                <option value="trabajador">Trabajador</option>
+                                <option value="supervisor">Supervisor directo</option>
+                                <option value="rrhh">Recursos Humanos</option>
+                                <option value="administracion">Administración</option>
+                                <option value="operaciones">Operaciones</option>
+                                <option value="legal">Legal</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="instrucciones">Instrucciones</label>
+                            <textarea class="form-control" id="instrucciones" rows="4" placeholder="Instrucciones detalladas para completar este paso..."></textarea>
+                            <small class="form-text text-muted">Estas instrucciones serán mostradas al usuario responsable.</small>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    <h2 class="h5 mb-3">Configuración de flujo</h2>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="activar_ramificacion" wire:model.live="activarRamificacion">
+                                <label class="form-check-label" for="activar_ramificacion">
+                                    Activar ramificación condicional
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Permite que el paso tenga diferentes caminos según la decisión tomada.</small>
+                        </div>
+                    </div>
+
+                    @if($activarRamificacion)
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <div class="card border-light shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h3 class="h6 mb-0">Tipo de flujo</h3>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <input type="radio" class="btn-check" name="tipo_flujo" id="flujo_secuencial" value="secuencial" wire:model="tipoFlujo" checked>
+                                            <label class="btn btn-outline-gray-600" for="flujo_secuencial">Flujo secuencial</label>
+
+                                            <input type="radio" class="btn-check" name="tipo_flujo" id="flujo_condicional" value="condicional" wire:model="tipoFlujo">
+                                            <label class="btn btn-outline-gray-600" for="flujo_condicional">Flujo condicional</label>
+                                        </div>
+                                    </div>
+                                    <p class="small text-gray-700 mb-0">
+                                        @if($tipoFlujo === 'secuencial')
+                                            <svg class="icon icon-xs text-primary me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                            El paso se ejecuta en orden lineal, avanzando al siguiente paso automáticamente.
+                                        @else
+                                            <svg class="icon icon-xs text-warning me-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                                            El paso puede tener múltiples caminos según la decisión (aprobado/rechazado).
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+
+                    <hr class="my-4">
+                    <h2 class="h5 mb-3">Configuración adicional</h2>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="tiempo_limite">Tiempo límite (días)</label>
+                            <input class="form-control" id="tiempo_limite" type="number" placeholder="3" min="1">
+                            <small class="form-text text-muted">Días hábiles para completar este paso.</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="prioridad">Prioridad</label>
+                            <select class="form-select" id="prioridad">
+                                <option value="baja">Baja</option>
+                                <option value="media" selected>Media</option>
+                                <option value="alta">Alta</option>
+                                <option value="urgente">Urgente</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="enviar_notificacion" wire:model="enviarNotificacion">
+                                <label class="form-check-label" for="enviar_notificacion">
+                                    Enviar notificación
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Notificar al responsable cuando llegue a este paso.</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="requiere_documentos" wire:model.live="requiereDocumentos">
+                                <label class="form-check-label" for="requiere_documentos">
+                                    Requiere documentos adjuntos
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">El paso solicita documentos específicos.</small>
+                        </div>
+                    </div>
+
+                    @if($requiereDocumentos)
+                    <hr class="my-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h2 class="h5 mb-0">Documentos requeridos</h2>
+                        <button type="button" class="btn btn-sm btn-gray-800" wire:click="agregarDocumento">
+                            <svg class="icon icon-xs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Agregar documento
+                        </button>
+                    </div>
+
+                    @if(count($documentos) > 0)
+                    <div class="mb-3">
+                        @foreach($documentos as $index => $documento)
+                        <div class="card border-light shadow-sm mb-2">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-primary rounded-circle me-2" style="width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">#{{ $index + 1 }}</span>
+                                        <h6 class="mb-0">Documento {{ $index + 1 }}</h6>
+                                    </div>
+                                    <button type="button" class="btn btn-link text-danger p-0 m-0" wire:click="eliminarDocumento('{{ $documento['id'] }}')">
+                                        <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Nombre del documento" wire:model="documentos.{{ $index }}.nombre">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input class="form-control form-control-sm" type="text" placeholder="Descripción (opcional)" wire:model="documentos.{{ $index }}.descripcion">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+                    @else
+                    <div class="alert alert-light" role="alert">
+                        <div class="d-flex align-items-center">
+                            <svg class="icon icon-xs text-gray-500 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="small">No hay documentos agregados. Haz clic en "Agregar documento" para añadir uno.</span>
+                        </div>
+                    </div>
+                    @endif
+                    @endif
+
+                    <div class="row align-items-center mt-4">
+                        <div class="col">
+                            <button class="btn btn-gray-800 mt-2 animate-up-2" type="submit">
+                                <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                Guardar paso
+                            </button>
+                            <a href="{{ route(config('proj.route_name_prefix', 'proj') . '.admin.definir-pasos') }}" class="btn btn-link text-gray-700 ms-2">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-12 col-xl-4">
+            <div class="card border-0 shadow mb-4">
+                <div class="card-header border-bottom">
+                    <h2 class="h6 mb-0">Tipos de paso</h2>
+                </div>
+                <div class="card-body">
+                    <p class="small text-gray-700 mb-3">Cada tipo de paso tiene un propósito específico en el flujo de trabajo:</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item px-0 border-bottom pb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-shape icon-sm icon-shape-info rounded me-2">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="h6 mb-1">Formulario</h3>
+                                    <p class="small mb-0">El usuario completa campos y proporciona información.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-0 border-bottom pb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-shape icon-sm icon-shape-warning rounded me-2">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="h6 mb-1">Aprobación</h3>
+                                    <p class="small mb-0">Requiere una decisión de aprobación (Sí/No). Ideal para flujos condicionales.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-0 border-bottom pb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-shape icon-sm icon-shape-primary rounded me-2">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="h6 mb-1">Validación</h3>
+                                    <p class="small mb-0">Verificación de requisitos o condiciones específicas.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-0 border-bottom pb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-shape icon-sm icon-shape-secondary rounded me-2">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="h6 mb-1">Carga de archivos</h3>
+                                    <p class="small mb-0">El usuario debe subir documentos específicos requeridos.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-0 border-bottom pb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-shape icon-sm icon-shape-tertiary rounded me-2">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="h6 mb-1">Comunicación</h3>
+                                    <p class="small mb-0">Envío de notificaciones o información a usuarios.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-0 pb-3">
+                            <div class="d-flex align-items-start">
+                                <div class="icon-shape icon-sm icon-shape-success rounded me-2">
+                                    <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                </div>
+                                <div>
+                                    <h3 class="h6 mb-1">Final</h3>
+                                    <p class="small mb-0">Cierra el proceso y notifica el resultado final.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow">
+                <div class="card-body">
+                    <h2 class="h6 mb-3">
+                        <svg class="icon icon-xs me-2 text-primary" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                        Nota importante
+                    </h2>
+                    <p class="small text-gray-700 mb-2">
+                        Los pasos condicionales solo pueden ejecutarse si están configurados con ramificación activada.
+                    </p>
+                    <p class="small text-gray-700 mb-0">
+                        El tipo "Aprobación" es ideal para flujos condicionales ya que permite definir diferentes caminos según la decisión tomada (aprobado/rechazado).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
